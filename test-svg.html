@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG导出测试</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+        }
+        button {
+            background: #007AFF;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        button:hover {
+            background: #0056CC;
+        }
+        .green-btn {
+            background: #34C759;
+        }
+        .green-btn:hover {
+            background: #30D158;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>星图SVG导出功能测试</h1>
+        <p>这个页面展示了星图应用的SVG导出功能。点击下面的按钮来测试SVG生成。</p>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <button onclick="generateSampleSVG()">生成示例SVG</button>
+            <button class="green-btn" onclick="downloadSVG()">下载SVG文件</button>
+        </div>
+        
+        <div class="svg-container" id="svg-preview">
+            <p>点击上方按钮生成SVG预览</p>
+        </div>
+        
+        <h2>功能说明</h2>
+        <ul>
+            <li>🎯 <strong>矢量格式</strong>：SVG是可缩放的矢量图形，无损放大缩小</li>
+            <li>🎨 <strong>高质量</strong>：保持星图的清晰度和细节</li>
+            <li>💾 <strong>小文件</strong>：相比PNG，文件体积更小</li>
+            <li>🔧 <strong>可编辑</strong>：可以用设计软件进一步编辑</li>
+            <li>🖨️ <strong>打印友好</strong>：适合高分辨率打印</li>
+        </ul>
+        
+        <h2>使用说明</h2>
+        <ol>
+            <li>在星图设计工具中设置好位置、时间和样式</li>
+            <li>点击控制面板底部的"导出SVG"按钮</li>
+            <li>SVG文件将自动下载到本地</li>
+            <li>可以在浏览器或设计软件中打开查看</li>
+        </ol>
+    </div>
+
+    <script>
+        // 模拟星图SVG生成
+        function generateSampleSVG() {
+            const svg = `
+                <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="bgGradient" cx="50%" cy="50%" r="50%">
+                            <stop offset="70%" stop-color="rgba(0,0,0,0)" />
+                            <stop offset="100%" stop-color="rgba(0,0,0,0.3)" />
+                        </radialGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                            <feMerge> 
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <rect width="400" height="400" fill="#0F172A"/>
+                    <clipPath id="circleClip">
+                        <circle cx="200" cy="200" r="180"/>
+                    </clipPath>
+                    <g clip-path="url(#circleClip)">
+                        <rect x="0" y="0" width="400" height="400" fill="url(#bgGradient)"/>
+                        <!-- 星星 -->
+                        <circle cx="150" cy="120" r="2" fill="#FFFFFF" opacity="1"/>
+                        <circle cx="250" cy="100" r="1.5" fill="#FFFFFF" opacity="0.8"/>
+                        <circle cx="300" cy="150" r="3" fill="#FFFFFF" opacity="1" filter="url(#glow)"/>
+                        <circle cx="180" cy="200" r="1" fill="#FFFFFF" opacity="0.6"/>
+                        <circle cx="220" cy="250" r="2.5" fill="#FFFFFF" opacity="0.9"/>
+                        <circle cx="120" cy="180" r="1.5" fill="#FFFFFF" opacity="0.7"/>
+                        <circle cx="280" cy="280" r="2" fill="#FFFFFF" opacity="0.8"/>
+                        <circle cx="160" cy="300" r="1" fill="#FFFFFF" opacity="0.5"/>
+                        <!-- 更多背景星星 -->
+                        <circle cx="90" cy="150" r="0.5" fill="#FFFFFF" opacity="0.3"/>
+                        <circle cx="320" cy="120" r="0.8" fill="#FFFFFF" opacity="0.4"/>
+                        <circle cx="270" cy="320" r="0.6" fill="#FFFFFF" opacity="0.3"/>
+                    </g>
+                    <circle cx="200" cy="200" r="180" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+                    <!-- 文字 -->
+                    <text x="200" y="340" text-anchor="middle" font-family="serif" font-size="18" font-weight="bold" fill="#FFFFFF">
+                        星空纪念日
+                    </text>
+                    <text x="200" y="360" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#FFFFFF">
+                        2024年6月2日 北京
+                    </text>
+                </svg>
+            `;
+            
+            document.getElementById('svg-preview').innerHTML = svg;
+        }
+        
+        function downloadSVG() {
+            const svgElement = document.querySelector('#svg-preview svg');
+            if (!svgElement) {
+                alert('请先生成SVG预览');
+                return;
+            }
+            
+            const svgContent = svgElement.outerHTML;
+            const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = '星图示例.svg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html> 
