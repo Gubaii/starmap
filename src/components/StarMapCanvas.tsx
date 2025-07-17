@@ -51,13 +51,14 @@ const StarMapCanvas = forwardRef<StarMapCanvasRef, StarMapCanvasProps>(({ config
     exportPNG
   }), [stars, config]);
 
-  // 只有位置和时间变化时才重新计算星星位置
+  // 位置、时间或星等限制变化时重新计算星星位置
   useEffect(() => {
     console.log('🌟 触发星星位置重新计算:', {
       latitude: config.location.latitude,
       longitude: config.location.longitude,
       date: config.date,
-      reason: 'location or date changed'
+      magnitudeLimit: config.style.magnitudeLimit,
+      reason: 'location, date, or magnitude limit changed'
     });
     
     setIsLoading(true);
@@ -83,7 +84,8 @@ const StarMapCanvas = forwardRef<StarMapCanvasRef, StarMapCanvasProps>(({ config
   }, [
     config.location.latitude,
     config.location.longitude, 
-    config.date.getTime() // 使用getTime()确保日期对象的变化被正确检测
+    config.date.getTime(), // 使用getTime()确保日期对象的变化被正确检测
+    config.style.magnitudeLimit // 添加星等限制依赖
   ]);
 
   // 重绘星图（只有星星位置或样式变化时）
