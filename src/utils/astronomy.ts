@@ -123,6 +123,61 @@ const BRIGHT_STARS = [
   // 天秤座 (Libra)
   { name: 'Zubeneschamali', ra: 229.252, dec: -9.383, mag: 2.61, constellation: 'Libra' },
   { name: 'Zubenelgenubi', ra: 222.720, dec: -16.042, mag: 2.75, constellation: 'Libra' },
+  
+  // === 南半球星座 ===
+  
+  // 南十字座 (Crux) - 南半球最著名的星座
+  { name: 'Acrux', ra: 186.650, dec: -63.099, mag: 0.77, constellation: 'Crux' },
+  { name: 'Gacrux', ra: 187.791, dec: -57.113, mag: 1.63, constellation: 'Crux' },
+  { name: 'Imai', ra: 191.930, dec: -59.689, mag: 1.25, constellation: 'Crux' },
+  { name: 'Mimosa', ra: 183.786, dec: -59.689, mag: 1.30, constellation: 'Crux' },
+  
+  // 半人马座 (Centaurus) - 包含离太阳最近的恒星系统
+  { name: 'Rigil Kent', ra: 219.902, dec: -60.834, mag: -0.27, constellation: 'Centaurus' },
+  { name: 'Hadar', ra: 210.956, dec: -60.373, mag: 0.61, constellation: 'Centaurus' },
+  { name: 'Muhlifain', ra: 190.379, dec: -48.960, mag: 2.20, constellation: 'Centaurus' },
+  { name: 'Menkent', ra: 211.670, dec: -36.370, mag: 2.06, constellation: 'Centaurus' },
+  
+  // 船底座 (Carina) - 包含老人星（全天第二亮星）
+  { name: 'Canopus', ra: 95.988, dec: -52.696, mag: -0.74, constellation: 'Carina' },
+  { name: 'Miaplacidus', ra: 138.300, dec: -69.717, mag: 1.68, constellation: 'Carina' },
+  { name: 'Avior', ra: 125.628, dec: -59.509, mag: 1.86, constellation: 'Carina' },
+  { name: 'Aspidiske', ra: 140.528, dec: -64.394, mag: 2.76, constellation: 'Carina' },
+  
+  // 船帆座 (Vela) - 原船座的一部分
+  { name: 'Suhail', ra: 136.999, dec: -43.433, mag: 2.21, constellation: 'Vela' },
+  { name: 'Regor', ra: 128.446, dec: -47.337, mag: 1.75, constellation: 'Vela' },
+  { name: 'Markeb', ra: 140.528, dec: -55.011, mag: 2.47, constellation: 'Vela' },
+  
+  // 凤凰座 (Phoenix)
+  { name: 'Ankaa', ra: 6.571, dec: -42.306, mag: 2.39, constellation: 'Phoenix' },
+  { name: 'Beta Phe', ra: 16.962, dec: -46.718, mag: 3.31, constellation: 'Phoenix' },
+  
+  // 天鹤座 (Grus)
+  { name: 'Alnair', ra: 332.058, dec: -46.961, mag: 1.74, constellation: 'Grus' },
+  { name: 'Beta Gru', ra: 340.667, dec: -46.885, mag: 2.11, constellation: 'Grus' },
+  { name: 'Gamma Gru', ra: 331.378, dec: -37.365, mag: 3.01, constellation: 'Grus' },
+  
+  // 孔雀座 (Pavo)
+  { name: 'Peacock', ra: 306.412, dec: -56.735, mag: 1.94, constellation: 'Pavo' },
+  { name: 'Beta Pav', ra: 315.161, dec: -66.203, mag: 3.42, constellation: 'Pavo' },
+  
+  // 杜鹃座 (Tucana) - 包含小麦哲伦云附近
+  { name: 'Alpha Tuc', ra: 337.137, dec: -60.261, mag: 2.86, constellation: 'Tucana' },
+  { name: 'Gamma Tuc', ra: 364.397, dec: -58.236, mag: 3.99, constellation: 'Tucana' },
+  
+  // 南冕座 (Corona Australis)
+  { name: 'Meridiana', ra: 287.368, dec: -37.904, mag: 4.11, constellation: 'CoronaAustralis' },
+  { name: 'Beta CrA', ra: 288.139, dec: -39.341, mag: 4.11, constellation: 'CoronaAustralis' },
+  
+  // 天坛座 (Ara)
+  { name: 'Beta Ara', ra: 264.325, dec: -55.530, mag: 2.85, constellation: 'Ara' },
+  { name: 'Alpha Ara', ra: 262.960, dec: -49.876, mag: 2.95, constellation: 'Ara' },
+  
+  // 南三角座 (Triangulum Australe)
+  { name: 'Atria', ra: 252.166, dec: -69.028, mag: 1.91, constellation: 'TriangulumAustrale' },
+  { name: 'Beta TrA', ra: 249.418, dec: -63.431, mag: 2.85, constellation: 'TriangulumAustrale' },
+  { name: 'Gamma TrA', ra: 244.970, dec: -68.680, mag: 2.89, constellation: 'TriangulumAustrale' },
 ];
 
 // 星座连线定义 - 扩展版本
@@ -190,6 +245,44 @@ export const CONSTELLATION_LINES = {
   ],
   'Libra': [ // 天秤座
     [75, 76]
+  ],
+  
+  // === 南半球星座连线 ===
+  
+  'Crux': [ // 南十字座 - 南半球最重要的星座
+    [77, 78], [78, 79], [79, 80], [80, 77], // 连成十字形
+    [78, 80] // 对角线
+  ],
+  'Centaurus': [ // 半人马座
+    [81, 82], [81, 83], [83, 84], // 主要连线
+    [82, 84] // 连接其他恒星
+  ],
+  'Carina': [ // 船底座
+    [85, 86], [85, 87], [86, 88], [87, 88] // 连成船的形状
+  ],
+  'Vela': [ // 船帆座
+    [89, 90], [90, 91], [91, 89] // 三角形连线
+  ],
+  'Phoenix': [ // 凤凰座
+    [92, 93] // 简单连线
+  ],
+  'Grus': [ // 天鹤座
+    [94, 95], [94, 96], [95, 96] // 连成鹤的形状
+  ],
+  'Pavo': [ // 孔雀座
+    [97, 98] // 简单连线
+  ],
+  'Tucana': [ // 杜鹃座
+    [99, 100] // 简单连线
+  ],
+  'CoronaAustralis': [ // 南冕座
+    [101, 102] // 简单连线
+  ],
+  'Ara': [ // 天坛座
+    [103, 104] // 简单连线
+  ],
+  'TriangulumAustrale': [ // 南三角座
+    [105, 106], [106, 107], [107, 105] // 三角形
   ],
 };
 

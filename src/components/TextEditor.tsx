@@ -1,12 +1,14 @@
 import React from 'react';
-import { TextConfig } from '../types';
+import { TextConfig, Location } from '../types';
 
 interface TextEditorProps {
   text: TextConfig;
+  location: Location;
+  date: Date;
   onChange: (text: TextConfig) => void;
 }
 
-const TextEditor: React.FC<TextEditorProps> = ({ text, onChange }) => {
+const TextEditor: React.FC<TextEditorProps> = ({ text, location, date, onChange }) => {
   const handleChange = (field: keyof TextConfig, value: string) => {
     onChange({ ...text, [field]: value });
   };
@@ -59,10 +61,14 @@ const TextEditor: React.FC<TextEditorProps> = ({ text, onChange }) => {
             {text.title || 'Your Special Moment'}
           </p>
           <p className="text-sm text-slate-300">
-            {text.subtitle || '2024年1月1日'}
+            {text.subtitle || date.toLocaleDateString('zh-CN', { 
+              year: 'numeric', 
+              month: 'long', 
+              day: 'numeric' 
+            })}
           </p>
           <p className="text-xs text-slate-400">
-            {text.date || '北京'}
+            {text.date || location.name}
           </p>
         </div>
       </div>

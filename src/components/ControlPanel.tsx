@@ -99,6 +99,8 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ config, updateConfig, onExp
         {activeTab === 'text' && (
           <TextEditor 
             text={config.text}
+            location={config.location}
+            date={config.date}
             onChange={(text) => updateConfig({ text })}
           />
         )}

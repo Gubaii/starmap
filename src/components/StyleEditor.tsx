@@ -55,6 +55,15 @@ const StyleEditor: React.FC<StyleEditorProps> = ({ style, onChange }) => {
     });
   };
 
+  // 检查当前样式是否匹配某个预设主题
+  const isThemeActive = (theme: typeof presetThemes[0]) => {
+    return (
+      style.starColor === theme.config.starColor &&
+      style.backgroundColor === theme.config.backgroundColor &&
+      style.constellationLines === theme.config.constellationLines
+    );
+  };
+
   return (
     <div className="space-y-4">
       {/* 预设主题 */}
@@ -63,16 +72,23 @@ const StyleEditor: React.FC<StyleEditorProps> = ({ style, onChange }) => {
           预设主题
         </label>
         <div className="grid grid-cols-2 gap-2">
-          {presetThemes.map((theme) => (
-            <button
-              key={theme.name}
-              onClick={() => applyTheme(theme)}
-              className="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded text-sm text-white transition-colors flex items-center gap-2"
-            >
-              <Palette size={14} />
-              {theme.name}
-            </button>
-          ))}
+          {presetThemes.map((theme) => {
+            const isActive = isThemeActive(theme);
+            return (
+              <button
+                key={theme.name}
+                onClick={() => applyTheme(theme)}
+                className={`px-3 py-2 border rounded text-sm transition-colors flex items-center gap-2 ${
+                  isActive
+                    ? 'bg-blue-600 hover:bg-blue-700 border-blue-500 text-white'
+                    : 'bg-slate-800 hover:bg-slate-700 border-slate-600 text-white'
+                }`}
+              >
+                <Palette size={14} />
+                {theme.name}
+              </button>
+            );
+          })}
         </div>
       </div>
 
